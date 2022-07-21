@@ -3,7 +3,9 @@ import './css/style.css';
 import './App.css';
 import Navigation from './components/layout/Navigation';
 import Header from './components/layout/Header';
-import {Routes, Route, BrowserRouter, useLocation} from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import {React, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import Companies from "./pages/Companies";
 import Contacts from "./pages/Contacts";
@@ -12,8 +14,13 @@ import Home from "./pages/Home";
 import Logout from "./pages/Logout";
 import People from "./pages/People";
 import Setting from "./pages/Setting";
+import { getPeople } from './service';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getPeople(dispatch);
+  });
   return (
     <BrowserRouter>
       <div className="App">
@@ -33,7 +40,6 @@ function App() {
           </div>
         </div>
       </div>
-      
     </BrowserRouter>
   );
 }
