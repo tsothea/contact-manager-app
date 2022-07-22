@@ -264,3 +264,37 @@ input.nosubmit {
 .menu-bottom a:hover {
   color: #2f89fc;
 }
+.list-view {
+  width: 96%;
+  padding: 1%;
+  margin: 1%;
+  border: 2px solid #ccc;
+}
+.align-items-center{
+  text-align: center;
+}
+.list-view .card {
+  margin-bottom: 0px;
+  padding: 0px;
+}
+.list-view .card .image .thumbnail {
+  width: 20%;
+  float: left;
+}
+.list-view .card .image .content {
+  float: left;
+  width: 50%;
+  text-align: left;
+  padding: 10px;
+  padding-left: 20px;
+}
+.list-view .card .image .content .name {
+  text-align: left;
+}
+.list-view .card .image .content div {
+  text-align: left;
+}
+.list-view .card .image .action-button {
+  width: 25%;
+  float: left;
+}
