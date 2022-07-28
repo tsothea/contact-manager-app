@@ -6,31 +6,36 @@ import {
   saveContact,
   saveFavourite,
 } from "../service";
+import AddContactForm from "./AddContactForm";
 
 export default function Contact(props) {
   const dispatch = useDispatch();
   const addContact = () => {
-    saveContact(props.data.index, dispatch);
+    saveContact(props.data.key, dispatch);
   };
   const removeContact = () => {
-    deleteContact(props.data.index, dispatch);
+    deleteContact(props.data.key, dispatch);
   };
 
   const addFavorite = () => {
-    saveFavourite(props.data.index, dispatch);
+    saveFavourite(props.data.key, dispatch);
   };
 
   const removeFavorite = () => {
-    deleteFavourite(props.data.index, dispatch);
+    deleteFavourite(props.data.key, dispatch);
   };
 
-  let css = '';
+  const editContact = () => {
+    //
+  };
+
+  let css = "";
   if (props.isListView) {
     css = "list-view";
   } else {
     css = "col-sm-3 border-column";
   }
-  
+
   if (props.index === 0 || props.index % 4 === 0) {
     css += " no-border";
   }
@@ -41,6 +46,9 @@ export default function Contact(props) {
   return (
     <div className={css}>
       <div className="card">
+        <a ahref="#" onClick={editContact}>
+          <i className="fa fa-edit"></i>
+        </a>
         <div className="image justify-content-center align-items-center">
           <span className="thumbnail">
             <img

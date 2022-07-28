@@ -1,10 +1,10 @@
-import './css/bootstrap.min.css';
-import './css/style.css';
-import './App.css';
-import Navigation from './components/layout/Navigation';
-import Header from './components/layout/Header';
-import {Routes, Route, BrowserRouter} from 'react-router-dom';
-import {React, useEffect } from "react";
+import "./css/bootstrap.min.css";
+import "./css/style.css";
+import "./App.css";
+import Navigation from "./components/layout/Navigation";
+import Header from "./components/layout/Header";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { React, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import Companies from "./pages/Companies";
@@ -14,12 +14,13 @@ import Home from "./pages/Home";
 import Logout from "./pages/Logout";
 import People from "./pages/People";
 import Setting from "./pages/Setting";
-import { getPeople } from './service';
+import { getPeople, getCompanies } from "./service";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     getPeople(dispatch);
+    getCompanies(dispatch);
   });
   return (
     <BrowserRouter>

@@ -3,7 +3,7 @@
   color: #006f9d;
 }
 
-form {
+form.inline {
   color: #555;
   display: flex;
   padding: 2px;
@@ -297,4 +297,14 @@ input.nosubmit {
 .list-view .card .image .action-button {
   width: 25%;
   float: left;
+}
+.contact-form {
+  width: 500px;
+}
+.contact-form input[type=text] {
+  border: 1px solid #ccc;
+}
+
+.contact-form .row {
+  margin-bottom: 5px;
 }

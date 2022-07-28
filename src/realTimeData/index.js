@@ -14,12 +14,11 @@ const firebaseConfig = {
   storageBucket: "contact-manager-62af7.appspot.com",
   messagingSenderId: "88027637943",
   appId: "1:88027637943:web:ebe43161a0dd2836940532",
-  measurementId: "G-ZLG2ELV6F9"
+  measurementId: "G-ZLG2ELV6F9",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-//console.log("Hello World");
 
 export default analytics;
