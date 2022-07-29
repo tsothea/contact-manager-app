@@ -1,9 +1,13 @@
+import { removeCompany } from "../service";
+import { useDispatch } from "react-redux";
+
 export default function Company(props) {
+  const dispatch = useDispatch();
   const editCompany = () => {
     //
   };
   const deleteCompany = () => {
-    //
+    removeCompany(props.data.key, dispatch);
   };
   return (
     <tr>

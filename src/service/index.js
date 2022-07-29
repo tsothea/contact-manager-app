@@ -6,11 +6,11 @@ import {
   removeContact,
   removeFavorite,
 } from "./actions";
-import { addCompany, fetchCompanies } from "./companyAction";
-import { addNewContact } from "./contactAction";
+import { addCompany, deleteCompany, fetchCompanies } from "./companyAction";
+import { addNewContact, editContact } from "./contactAction";
 
-export const getPeople = (dispatch) => {
-  return axios
+export const getPeople = async (dispatch) => {
+  return await axios
     .get(process.env.REACT_APP_FIREBASE_URL + "/people.json")
     .then((response) => {
       let people = [];
@@ -21,9 +21,9 @@ export const getPeople = (dispatch) => {
     });
 };
 
-export const saveContact = (key, dispatch) => {
+export const saveContact = async (key, dispatch) => {
   let updateData = { isContact: true };
-  axios
+  await axios
     .patch(
       process.env.REACT_APP_FIREBASE_URL + "/people/" + key + ".json",
       updateData
@@ -33,9 +33,9 @@ export const saveContact = (key, dispatch) => {
     });
 };
 
-export const deleteContact = (key, dispatch) => {
+export const deleteContact = async (key, dispatch) => {
   let updateData = { isContact: false, isFavourite: false };
-  axios
+  await axios
     .patch(
       process.env.REACT_APP_FIREBASE_URL + "/people/" + key + ".json",
       updateData
@@ -45,9 +45,9 @@ export const deleteContact = (key, dispatch) => {
     });
 };
 
-export const saveFavourite = (key, dispatch) => {
+export const saveFavourite = async (key, dispatch) => {
   let updateData = { isFavourite: true };
-  axios
+  await axios
     .patch(
       process.env.REACT_APP_FIREBASE_URL + "/people/" + key + ".json",
       updateData
@@ -57,9 +57,9 @@ export const saveFavourite = (key, dispatch) => {
     });
 };
 
-export const deleteFavourite = (key, dispatch) => {
+export const deleteFavourite = async (key, dispatch) => {
   let updateData = { isFavourite: false };
-  axios
+  await axios
     .patch(
       process.env.REACT_APP_FIREBASE_URL + "/people/" + key + ".json",
       updateData
@@ -69,8 +69,8 @@ export const deleteFavourite = (key, dispatch) => {
     });
 };
 
-export const getCompanies = (dispatch) => {
-  return axios
+export const getCompanies = async (dispatch) => {
+  return await axios
     .get(process.env.REACT_APP_FIREBASE_URL + "/companies.json")
     .then((response) => {
       let companies = [];
@@ -81,35 +81,46 @@ export const getCompanies = (dispatch) => {
     });
 };
 
-export const addNewCompany = (company, dispatch) => {
-  return axios
+export const addNewCompany = async (company, dispatch) => {
+  return await axios
     .post(process.env.REACT_APP_FIREBASE_URL + "/companies.json", company)
     .then(() => {
       dispatch(addCompany(company));
     });
 };
 
-export const editCompany = (dispatch) => {
-  return axios
+export const editCompany = async (dispatch) => {
+  return await axios
     .get(process.env.REACT_APP_FIREBASE_URL + "/companies.json")
     .then((response) => {
       dispatch(fetchCompanies(response.data));
     });
 };
 
-export const deleteCompany = (dispatch) => {
-  return axios
-    .get(process.env.REACT_APP_FIREBASE_URL + "/companies.json")
-    .then((response) => {
-      dispatch(fetchCompanies(response.data));
+export const removeCompany = async (key, dispatch) => {
+  return await axios
+    .delete(process.env.REACT_APP_FIREBASE_URL + "/companies/" + key + ".json")
+    .then(() => {
+      dispatch(deleteCompany(key));
     });
 };
 
-export const saveNewContact = (formData, dispatch) => {
-  axios
+export const saveNewContact = async (formData, dispatch) => {
+  await axios
     .post(process.env.REACT_APP_FIREBASE_URL + "/people.json", formData)
     .then((response) => {
       formData["key"] = response.data["name"];
       dispatch(addNewContact(formData));
+    });
+};
+
+export const updateNewContact = async (formData, dispatch) => {
+  await axios
+    .patch(
+      process.env.REACT_APP_FIREBASE_URL + "/people/" + formData.key + ".json",
+      formData
+    )
+    .then(() => {
+      dispatch(editContact(formData.key, formData));
     });
 };

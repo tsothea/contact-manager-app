@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { filterLocation } from "../service/actions";
 
 const Title = (props) => {
@@ -21,31 +22,52 @@ const Title = (props) => {
       setDisplayList("");
     }
   };
+  let selectedLocation = state.location;
+  console.log(selectedLocation);
 
   return (
     <div className="header-title">
-      <span className="title">{props.title}</span>
-      <a href="#" onClick={(e) => changeDisplay(e, false)}>
-        <span className={"fa fa-th grid " + displayGride}></span>
-      </a>
-      <a href="#" onClick={(e) => changeDisplay(e, true)}>
-        <span className={"fa fa-bars grid " + displayList}></span>
-      </a>
-      <span className="text-right">
-        <span className="fa fa-map-marker icon-map"></span>
-        <select
-          className="location-opt"
-          name="location"
-          onChange={(e) => dispatch(filterLocation(e.target.value))}
-        >
-          <option value="">All</option>
-          {locations.map((location) => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
-      </span>
+      <div className="row">
+        <div className="col-sm-4">
+          <span className="title">{props.title}</span>
+          <a href="#" onClick={(e) => changeDisplay(e, false)}>
+            <span className={"fa fa-th grid " + displayGride}></span>
+          </a>
+          <a href="#" onClick={(e) => changeDisplay(e, true)}>
+            <span className={"fa fa-bars grid " + displayList}></span>
+          </a>
+        </div>
+        <div className="col-sm-4">
+          <span className="text-center">
+            <NavLink to="/people/add" className="btn btn-primary">
+              <span className="fa fa-plus mr-3"></span> Add New Contact
+            </NavLink>
+          </span>
+        </div>
+        <div className="col-sm-4">
+          <span className="text-right">
+            <span className="fa fa-map-marker icon-map"></span>
+            <select
+              className="location-opt"
+              name="location"
+              onChange={(e) => dispatch(filterLocation(e.target.value))}
+            >
+              <option value="">All</option>
+              {locations.map((location) => (
+                <option
+                  key={location}
+                  value={location}
+                  {...(selectedLocation === location
+                    ? ' selected="selected"'
+                    : "")}
+                >
+                  {location}
+                </option>
+              ))}
+            </select>
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

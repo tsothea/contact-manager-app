@@ -1,15 +1,17 @@
 import Socials from "./helper/Socials";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   deleteContact,
   deleteFavourite,
   saveContact,
   saveFavourite,
 } from "../service";
-import AddContactForm from "./AddContactForm";
 
 export default function Contact(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const addContact = () => {
     saveContact(props.data.key, dispatch);
   };
@@ -26,7 +28,7 @@ export default function Contact(props) {
   };
 
   const editContact = () => {
-    //
+    navigate("/people/add", { state: props.data });
   };
 
   let css = "";

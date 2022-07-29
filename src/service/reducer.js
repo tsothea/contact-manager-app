@@ -36,7 +36,6 @@ const searchbyLocation = (person, location) => {
 const reducer = (state = initialState, action) => {
   let people = [];
   let companies = [];
-  let listPeople = [];
   switch (action.type) {
     case process.env.REACT_APP_GET_PEOPLE:
       return {
@@ -152,11 +151,9 @@ const reducer = (state = initialState, action) => {
         companies: action.payload.companies,
       };
     case process.env.REACT_APP_ADD_COMPANY:
-      companies = state.companies;
-      companies.push(action.payload.company);
       return {
         ...state,
-        companies: companies,
+        companies: [...state.companies, action.payload.company],
       };
     case process.env.REACT_APP_EDIT_COMPANY:
       return {
@@ -164,27 +161,36 @@ const reducer = (state = initialState, action) => {
         companies: action.payload.companies,
       };
     case process.env.REACT_APP_DELETE_COMPANY:
+      companies = state.companies.filter((company) => {
+        if (company.key !== action.payload.key) {
+          return company;
+        }
+      });
       return {
         ...state,
-        companies: action.payload.companies,
+        companies: companies,
       };
     case process.env.REACT_APP_ADD_NEW_CONTACT:
-      people = state.people;
-      people.push(action.payload.params);
       return {
         ...state,
-        //listPeople: listPeople,
+        listPeople: [...state.listPeople, action.payload.params],
+        people: [...state.people, action.payload.params],
+      };
+    case process.env.REACT_APP_EDIT_CONTACT:
+      people = state.people.map((person) => {
+        if (person.key === action.payload.key) {
+          return action.payload.params;
+        }
+        return person;
+      });
+      return {
+        ...state,
         people: people,
       };
     case process.env.REACT_APP_EDIT_CONTACT:
       return {
         ...state,
-        isListView: action.payload.isListView,
-      };
-    case process.env.REACT_APP_EDIT_CONTACT:
-      return {
-        ...state,
-        isListView: action.payload.isListView,
+        companies: action.payload.company,
       };
     default:
       return {

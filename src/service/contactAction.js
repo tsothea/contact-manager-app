@@ -5,9 +5,9 @@ export const addNewContact = (params) => {
   };
 };
 
-export const editContact = (id, params) => {
+export const editContact = (key, params) => {
   return {
     type: process.env.REACT_APP_EDIT_CONTACT,
-    payload: { id: id, params: params },
+    payload: { key: key, params: params },
   };
 };

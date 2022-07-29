@@ -19,9 +19,9 @@ export const editCompany = (company) => {
   };
 };
 
-export const deleteCompany = (id) => {
+export const deleteCompany = (key) => {
   return {
     type: process.env.REACT_APP_DELETE_COMPANY,
-    payload: { id: id },
+    payload: { key: key },
   };
 };

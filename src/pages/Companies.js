@@ -38,7 +38,7 @@ export default function Companies() {
   };
 
   const updateFormValue = (e) => {
-    //setCompanyForm({ name: e.target.value });
+    setCompanyForm({ name: e.target.value });
   };
   return (
     <div id="content">

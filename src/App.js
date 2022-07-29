@@ -15,6 +15,7 @@ import Logout from "./pages/Logout";
 import People from "./pages/People";
 import Setting from "./pages/Setting";
 import { getPeople, getCompanies } from "./service";
+import AddContact from "./pages/AddContact";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
               <Route exact path="/contacts" element={<Contacts />} />
               <Route exact path="/favorites" element={<Favourites />} />
               <Route exact path="/people" element={<People />} />
+              <Route exact path="/people/add" element={<AddContact />} />
               <Route exact path="/companies" element={<Companies />} />
               <Route exact path="/setting" element={<Setting />} />
               <Route exact path="/logout" element={<Logout />} />

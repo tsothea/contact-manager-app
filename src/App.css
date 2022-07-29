@@ -308,3 +308,9 @@ input.nosubmit {
 .contact-form .row {
   margin-bottom: 5px;
 }
+.mleft {
+  margin-left: 50px;
+}
+.flleft {
+  float: left;
+}

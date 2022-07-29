@@ -2,7 +2,6 @@ import Title from "../components/Title";
 import Contact from "../components/Contact";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import AddContactForm from "../components/AddContactForm";
 
 export default function People() {
   const state = useSelector((state) => state);
@@ -16,9 +15,6 @@ export default function People() {
   return (
     <div id="content">
       <Title title="People" ListView={getListView} />
-      <AddContactForm />
-      <br />
-      <br />
       <div className="row">
         {people.map((item, i) => {
           return (
