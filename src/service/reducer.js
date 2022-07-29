@@ -26,7 +26,7 @@ const searchbyLocation = (person, location) => {
   if (
     location === "" ||
     location === undefined ||
-    (location !== "" && person.location.toLowerCase() === location)
+    (location !== "" && person.city.toLowerCase() === location.toLowerCase())
   ) {
     return true;
   }
@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
         people = state.listPeople.filter((person) => {
           if (
             searchContact(person, action.payload.param.toLowerCase()) &&
-            searchbyLocation(person, state.location.toLowerCase())
+            searchbyLocation(person, state.location)
           )
             return person;
         });
@@ -59,7 +59,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         search: action.payload.param,
-        people: people,
+        people,
       };
     case process.env.REACT_APP_ADD_CONTACT:
       people = state.listPeople.filter((person) => {
@@ -68,13 +68,13 @@ const reducer = (state = initialState, action) => {
         }
         if (
           searchContact(person, state.search.toLowerCase()) &&
-          searchbyLocation(person, state.location.toLowerCase())
+          searchbyLocation(person, state.location)
         )
           return person;
       });
       return {
         ...state,
-        people: people,
+        people,
       };
     case process.env.REACT_APP_REMOVE_CONTACT:
       people = state.listPeople.filter((person) => {
@@ -84,13 +84,13 @@ const reducer = (state = initialState, action) => {
         }
         if (
           searchContact(person, state.search.toLowerCase()) &&
-          searchbyLocation(person, state.location.toLowerCase())
+          searchbyLocation(person, state.location)
         )
           return person;
       });
       return {
         ...state,
-        people: people,
+        people,
       };
     case process.env.REACT_APP_ADD_FAVOURITE:
       people = state.listPeople.filter((person) => {
@@ -99,13 +99,13 @@ const reducer = (state = initialState, action) => {
         }
         if (
           searchContact(person, state.search.toLowerCase()) &&
-          searchbyLocation(person, state.location.toLowerCase())
+          searchbyLocation(person, state.location)
         )
           return person;
       });
       return {
         ...state,
-        people: people,
+        people,
       };
     case process.env.REACT_APP_REMOVE_FAVOURITE:
       people = state.listPeople.filter((person) => {
@@ -114,13 +114,13 @@ const reducer = (state = initialState, action) => {
         }
         if (
           searchContact(person, state.search.toLowerCase()) &&
-          searchbyLocation(person, state.location.toLowerCase())
+          searchbyLocation(person, state.location)
         )
           return person;
       });
       return {
         ...state,
-        people: people,
+        people,
       };
     case process.env.REACT_APP_GET_LOCATION:
       if (action.payload.location === "") {
@@ -129,14 +129,14 @@ const reducer = (state = initialState, action) => {
         people = state.listPeople.filter((person) => {
           if (
             searchContact(person, state.search.toLowerCase()) &&
-            searchbyLocation(person, state.location.toLowerCase())
+            searchbyLocation(person, action.payload.location)
           )
             return person;
         });
       }
       return {
         ...state,
-        people: people,
+        people,
         location: action.payload.location,
       };
     case process.env.REACT_APP_VIEW_DISPLAY:
@@ -168,7 +168,7 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        companies: companies,
+        companies,
       };
     case process.env.REACT_APP_ADD_NEW_CONTACT:
       return {
@@ -185,7 +185,7 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        people: people,
+        people,
       };
     case process.env.REACT_APP_EDIT_CONTACT:
       return {

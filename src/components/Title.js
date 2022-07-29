@@ -7,23 +7,14 @@ const Title = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
-  const [displayGride, setDisplayGride] = useState("active");
-  const [displayList, setDisplayList] = useState("");
   const locations = [...new Set(state.listPeople.map((person) => person.city))];
 
   const changeDisplay = (e, isGride) => {
     e.preventDefault();
     props.ListView(isGride);
-    if (isGride) {
-      setDisplayGride("");
-      setDisplayList("active");
-    } else {
-      setDisplayGride("active");
-      setDisplayList("");
-    }
   };
   let selectedLocation = state.location;
-  console.log(selectedLocation);
+  let isListView = props.isListView;
 
   return (
     <div className="header-title">
@@ -31,10 +22,14 @@ const Title = (props) => {
         <div className="col-sm-4">
           <span className="title">{props.title}</span>
           <a href="#" onClick={(e) => changeDisplay(e, false)}>
-            <span className={"fa fa-th grid " + displayGride}></span>
+            <span
+              className={"fa fa-th grid " + (!isListView ? " active" : "")}
+            ></span>
           </a>
           <a href="#" onClick={(e) => changeDisplay(e, true)}>
-            <span className={"fa fa-bars grid " + displayList}></span>
+            <span
+              className={"fa fa-bars grid " + (isListView ? " active" : "")}
+            ></span>
           </a>
         </div>
         <div className="col-sm-4">
@@ -50,17 +45,12 @@ const Title = (props) => {
             <select
               className="location-opt"
               name="location"
+              value={selectedLocation}
               onChange={(e) => dispatch(filterLocation(e.target.value))}
             >
               <option value="">All</option>
               {locations.map((location) => (
-                <option
-                  key={location}
-                  value={location}
-                  {...(selectedLocation === location
-                    ? ' selected="selected"'
-                    : "")}
-                >
+                <option key={location} value={location}>
                   {location}
                 </option>
               ))}

@@ -1,15 +1,12 @@
 import Title from "../components/Title";
 import Contact from "../components/Contact";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import SwitchView from "../components/hook/SwitchView";
 
 export default function Contacts() {
   const state = useSelector((state) => state);
   const contacts = state.people.filter((person) => person.isContact);
-  const [isListView, setListView] = useState(false);
-  const getListView = (isList) => {
-    setListView(isList);
-  };
+  const [isListView, getListView] = SwitchView();
 
   return (
     <div id="content">
